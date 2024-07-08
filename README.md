@@ -4,13 +4,27 @@ Proof of concept for a phone-simulated chatbot.
 <img width="292" alt="image" src="https://github.com/linus-amg/fonk/assets/7453396/717e2377-7329-4d70-9b0d-19eacdd1b6fd">
 <img width="291" alt="image" src="https://github.com/linus-amg/fonk/assets/7453396/994c1237-4025-4de8-ae3c-b5bff0c4df23">
 
-
 ## Use cases
 - simulate a phone call with a chatbot to
   - learn a language
   - practice phone calls
+ 
+## Technologies used
+- Claude AI to generate random characters
+- ChatGPT to create avatar images for the random characters
+- Next.JS for building FE+BE for the App
+- Elevenlabs for text-to-speech generation
 
-## How to run
+## How does it work
+- when clicking on an avatar we simulate a phone call, with dialing, ringback and greeting sounds
+- the user's microphone get's enabled and the transcript of the spoken text (using native speech recognition) will be sent to the backend
+- if the transcript is not empty and did not change in the last 1500ms, we send the transcript to the backend
+- the backend receives the transcript and generates an answer using Claude AI with some instructions around it (conversation/history starts for the call)
+- the generated answer from Claude AI get's passed to Elevenlabs to generate a speech file which get's streamed to the user's client
+- the client receives the speech file and plays it, usually the response from Claude AI contains an open question and the user's microphone will be enabled again so he can respond
+- whenever there is a language switch in the backend (through Claude AI) we pass it in the text-to-speech response, so the client can re-initialize the microphones native speech recognition with the desired language
+
+## How to run (you will need the API keys for the external services to run the app locally)
 1. Clone the repository
 2. Run `npm install`
 3. Run `npm start`
