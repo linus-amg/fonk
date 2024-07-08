@@ -1,7 +1,5 @@
-import { ElevenLabsClient } from 'elevenlabs'
+import tts from '@/api/tts'
 import { NextRequest, NextResponse } from 'next/server'
-
-const elevenlabs = new ElevenLabsClient()
 
 const greetingsCache: { [key: string]: Buffer | undefined } = {}
 
@@ -17,17 +15,7 @@ export async function POST(req: NextRequest) {
         headers: { 'Content-Type': 'audio/mpeg' },
       })
     } else {
-      const audioStream = await elevenlabs.generate({
-        voice,
-        model_id: 'eleven_multilingual_v2',
-        voice_settings: {
-          similarity_boost: 0.1,
-          stability: 0.3,
-          use_speaker_boost: false,
-        },
-        text: message,
-        optimize_streaming_latency: '2',
-      })
+      const audioStream = await tts(message, voice)
 
       const audioBuffer: Buffer = await new Promise((resolve, reject) => {
         const chunks: Buffer[] = []

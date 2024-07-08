@@ -1,9 +1,7 @@
-import generateBotMessage from '@/api/generateBotMessage'
 import characters from '@/api/characters'
-import { ElevenLabsClient } from 'elevenlabs'
+import generateBotMessage from '@/api/generateBotMessage'
+import tts from '@/api/tts'
 import { NextRequest, NextResponse } from 'next/server'
-
-const elevenlabs = new ElevenLabsClient()
 
 interface Header {
   [key: string]: string
@@ -29,18 +27,7 @@ export async function POST(req: NextRequest) {
       return new NextResponse('No message generated', { status: 404 })
     }
 
-    const audioStream = await elevenlabs.generate({
-      voice: character.voice,
-      model_id: 'eleven_multilingual_v2',
-      voice_settings: {
-        similarity_boost: 0.1,
-        style: 0,
-        stability: 0.3,
-        use_speaker_boost: false,
-      },
-      text: botMessage.text,
-      optimize_streaming_latency: '2',
-    })
+    const audioStream = await tts(botMessage.text, character.voice)
 
     const headers: Header = { 'Content-Type': 'audio/mpeg' }
 
