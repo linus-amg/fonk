@@ -136,10 +136,11 @@ const CallModule = ({ character, status, onEnd, onSpeakerChange, callId, childre
   }, [status, resetTranscript])
 
   useEffect(() => {
-    const delay = 1000
+    const delay = 1500
 
     const resetTimer = setTimeout(() => {
       if (transcript) {
+        onSpeakerChange('bot')
         SpeechRecognition.stopListening()
           .then(() => {})
           .catch((error: unknown) => {
@@ -150,7 +151,9 @@ const CallModule = ({ character, status, onEnd, onSpeakerChange, callId, childre
           onEnd()
         } else {
           sendResponse(transcript)
-            .then(() => {})
+            .then(() => {
+              console.log('SENT', transcript)
+            })
             .catch((error: unknown) => {
               console.error(error)
             })

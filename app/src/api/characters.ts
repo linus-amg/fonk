@@ -205,7 +205,7 @@ const character6 = {
   weight: 80,
   height: 180,
   photo: '/avatars/6.webp',
-  greeting: 'Howdy, how are you doing?',
+  greeting: 'Hey, marcus here. Who is this?',
 }
 
 const characters: Character[] = [character1, character2, character3, character4, character5, character6]
