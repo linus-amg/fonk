@@ -4,6 +4,9 @@ Proof of concept for a phone-simulated chatbot.
 <img width="292" alt="image" src="https://github.com/linus-amg/fonk/assets/7453396/717e2377-7329-4d70-9b0d-19eacdd1b6fd">
 <img width="291" alt="image" src="https://github.com/linus-amg/fonk/assets/7453396/994c1237-4025-4de8-ae3c-b5bff0c4df23">
 
+## Try it out
+https://fonk-neon.vercel.app/
+
 ## Use cases
 - simulate a phone call with a chatbot to
   - learn a language
